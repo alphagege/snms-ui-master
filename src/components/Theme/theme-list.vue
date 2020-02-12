@@ -37,13 +37,13 @@ export default {
     }
   },
   computed: {
-    ...mapState('theme', [
+    ...mapState('coframe/theme', [
       'list',
       'activeName'
     ])
   },
   methods: {
-    ...mapActions('theme', [
+    ...mapActions('coframe/theme', [
       'set'
     ]),
     handleSelectTheme (name) {

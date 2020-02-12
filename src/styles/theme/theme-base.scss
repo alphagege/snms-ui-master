@@ -43,3 +43,177 @@
                 .coframe-layout-header-aside-mask {
                     @extend %full;
                 }
+                
+                // 主体
+                .app-main {
+                    // 布局组件
+                    .container-component {
+                        @extend %full;
+                        overflow: hidden;
+                        // 填充式布局组件
+                        .co-container-full {
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                            bottom: 0px;
+                            left: 0px;
+                            display: flex;
+                            flex-direction: column;
+                            overflow: hidden;
+                            .co-container-full__header {
+                                padding: 20px;
+                            }
+                            .co-container-full__body {
+                                flex-grow: 1;
+                                height: 100%;
+                                padding: 20px 20px;
+                                overflow: auto;
+                                position: relative;
+                            }
+                            .co-container-full__footer {
+                                padding: 20px;
+                            }
+                        }
+                        // 填充式布局组件 - 滚动优化
+                        .co-container-full-bs {
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                            bottom: 0px;
+                            left: 0px;
+                            display: flex;
+                            flex-direction: column;
+                            overflow: hidden;
+                            .co-container-full-bs__header {
+                                padding: 20px;
+                            }
+                            .co-container-full-bs__body {
+                                flex-grow: 1;
+                                overflow: hidden;
+                                position: relative;
+                                .co-container-full-bs__body-wrapper-inner {
+                                    padding: 20px;
+                                    position: relative;
+                                }
+                            }
+                            .co-container-full-bs__footer {
+                                padding: 20px;
+                            }
+                        }
+                        // 隐形布局组件
+                        .co-container-ghost {
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                            bottom: 0px;
+                            left: 0px;
+                            display: flex;
+                            flex-direction: column;
+                            overflow: hidden;
+                            .co-container-ghost__header {
+                                padding: 20px;
+                                border-bottom-left-radius: 4px;
+                                border-bottom-right-radius: 4px;
+                            }
+                            .co-container-ghost__body {
+                                flex-grow: 1;
+                                overflow: auto;
+                                position: relative;
+                            }
+                            .co-container-ghost__footer {
+                                padding: 20px;
+                                border-top-left-radius: 4px;
+                                border-top-right-radius: 4px;
+                            }
+                        }
+                        // 隐形布局组件 - 滚动优化
+                        .co-container-ghost-bs {
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                            bottom: 0px;
+                            left: 0px;
+                            display: flex;
+                            flex-direction: column;
+                            overflow: hidden;
+                            .co-container-ghost-bs__header {
+                                padding: 20px;
+                                border-bottom-left-radius: 4px;
+                                border-bottom-right-radius: 4px;
+                            }
+                            .co-container-ghost-bs__body {
+                                flex-grow: 1;
+                                overflow: hidden;
+                                position: relative;
+                            }
+                            .co-container-ghost-bs__footer {
+                                padding: 20px;
+                                border-top-left-radius: 4px;
+                                border-top-right-radius: 4px;
+                            }
+                        }
+                        // 卡片式布局组件
+                        .co-container-card {
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                            bottom: 0px;
+                            left: 0px;
+                            display: flex;
+                            flex-direction: column;
+                            overflow: hidden;
+                            .co-container-card__header {
+                                padding: 20px;
+                            }
+                            .co-container-card__body {
+                                flex-grow: 1;
+                                overflow: auto;
+                                .co-container-card__body-card {
+                                    position: relative;
+                                    margin-bottom: 20px;
+                                    padding: 20px;
+                                    border-bottom-left-radius: 4px;
+                                    border-bottom-right-radius: 4px;
+                                }
+                            }
+                            .co-container-card__footer {
+                                padding: 20px;
+                                border-top-left-radius: 4px;
+                                border-top-right-radius: 4px;
+                            }
+                        }
+                        // 卡片式布局组件 - 滚动优化
+                        .co-container-card-bs {
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                            bottom: 0px;
+                            left: 0px;
+                            display: flex;
+                            flex-direction: column;
+                            overflow: hidden;
+                            .co-container-card-bs__header {
+                                padding: 20px;
+                            }
+                            .co-container-card-bs__body {
+                                position: relative;
+                                flex-grow: 1;
+                                overflow: hidden;
+                                .co-container-card-bs__body-wrapper-inner {
+                                    padding-bottom: 20px;
+                                }
+                                .co-container-card-bs__body-card {
+                                    position: relative;
+                                    padding: 20px;
+                                    border-bottom-left-radius: 4px;
+                                    border-bottom-right-radius: 4px;
+                                }
+                            }
+                            .co-container-card-bs__footer {
+                                padding: 20px;
+                                border-top-left-radius: 4px;
+                                border-top-right-radius: 4px;
+                            }
+                        }
+                    }
+                }

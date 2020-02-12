@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import ResizeMixin from './mixin/ResizeHandler'
 import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
@@ -40,13 +40,10 @@ export default {
   },
   mixins: [ResizeMixin],
   computed: {
-    // 这里用mapGetters引入sider在下面的classObj会报错，这么用就不会报错
-    ...mapState({
-      sidebar: state => state.app.sidebar,
-      device: state => state.app.device
-    }),
     ...mapGetters({
-      themeActiveSetting: 'theme/activeSetting'
+      sidebar: 'coframe/app/sidebar',
+      device: 'coframe/app/device',
+      themeActiveSetting: 'coframe/theme/activeSetting'
     }),
     classObj () {
       return {
@@ -69,12 +66,16 @@ export default {
       }
     }
   },
-
-  mounted () { },
+  beforeCreate () {
+    // 用户登录后从数据库加载一系列的设置
+    this.$store.dispatch('coframe/theme/load')
+    // 用户登录后从数据库加载一系列的设置
+    this.$store.dispatch('coframe/user/load')
+  },
 
   methods: {
     handleClickOutside () {
-      this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
+      this.$store.dispatch('coframe/app/closeSideBar', { withoutAnimation: false })
     }
   }
 }

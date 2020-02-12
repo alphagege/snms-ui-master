@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     visitedViews () {
-      return this.$store.state.tagsView.visitedViews
+      return this.$store.state.coframe.tagsView.visitedViews
     },
     routes () {
       return this.$router.options.routes
@@ -107,7 +107,7 @@ export default {
       for (const tag of affixTags) {
         // Must have tag name
         if (tag.name) {
-          this.$store.dispatch('tagsView/addVisitedView', tag)
+          this.$store.dispatch('coframe/tagsView/addVisitedView', tag)
         }
       }
     },
@@ -115,7 +115,7 @@ export default {
       const { name } = this.$route // 当前点击的路由名称
       // 如果名称存在，执行vuex中的 addView方法，将当前路由对象穿进去
       if (name) {
-        this.$store.dispatch('tagsView/addView', this.$route)
+        this.$store.dispatch('coframe/tagsView/addView', this.$route)
       }
       return false
     },
@@ -127,7 +127,7 @@ export default {
             this.$refs.scrollPane.moveToTarget(tag)
             // when query is different then update
             if (tag.to.fullPath !== this.$route.fullPath) {
-              this.$store.dispatch('tagsView/updateVisitedView', this.$route)
+              this.$store.dispatch('coframe/tagsView/updateVisitedView', this.$route)
             }
             break
           }
@@ -135,7 +135,7 @@ export default {
       })
     },
     // refreshSelectedTag(view) {
-    //   this.$store.dispatch("tagsView/delCachedView", view).then(() => {
+    //   this.$store.dispatch("coframe/tagsView/delCachedView", view).then(() => {
     //     const { fullPath } = view;
     //     this.$nextTick(() => {
     //       this.$router.replace({
@@ -147,7 +147,7 @@ export default {
     // 点击关闭tagviews
     closeSelectedTag (view) {
       this.$store
-        .dispatch('tagsView/delView', view)
+        .dispatch('coframe/tagsView/delView', view)
         .then(({ visitedViews }) => {
           if (this.isActive(view)) {
             this.toLastView(visitedViews, view)
@@ -157,13 +157,13 @@ export default {
     closeOthersTags () {
       this.$router.push(this.selectedTag)
       this.$store
-        .dispatch('tagsView/delOthersViews', this.selectedTag)
+        .dispatch('coframe/tagsView/delOthersViews', this.selectedTag)
         .then(() => {
           this.moveToCurrentTag()
         })
     },
     closeAllTags (view) {
-      this.$store.dispatch('tagsView/delAllViews').then(({ visitedViews }) => {
+      this.$store.dispatch('coframe/tagsView/delAllViews').then(({ visitedViews }) => {
         if (this.affixTags.some(tag => tag.path === view.path)) {
           return
         }

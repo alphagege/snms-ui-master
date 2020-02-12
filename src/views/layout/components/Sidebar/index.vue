@@ -35,7 +35,9 @@ export default {
   },
   created () { },
   computed: {
-    ...mapGetters(['sidebar']),
+    ...mapGetters({
+      sidebar: 'coframe/app/sidebar'
+    }),
     // 高亮的路径
     activeMenu () {
       const route = this.$route
@@ -49,7 +51,8 @@ export default {
 
     // 是否显示logo
     showLogo () {
-      return this.$store.state.settings.sidebarLogo
+      console.log(this.$store)
+      return this.$store.state.coframe.settings.sidebarLogo
     },
 
     // 主题颜色

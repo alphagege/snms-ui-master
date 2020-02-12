@@ -346,30 +346,24 @@ a.white {
     height: 70px;
 }
 
-::-webkit-scrollbar {
-    width: 9px;
-    height: 9px;
-    background-color: #F5F5F5;
-    opacity: .8;
-}
-
-
-/*定义滚动条轨道 内阴影+圆角*/
-
-::-webkit-scrollbar-track {
-    border-radius: 0px;
-    background-color: #F5F5F5;
-}
-
-
-/*定义滑块 内阴影+圆角*/
-
-::-webkit-scrollbar-thumb {
-    border-radius: 0px;
-    background-color: #909399;
-    opacity: .8;
-}
-
+// 谷歌浏览器下自定义滚动条样式
+// ::-webkit-scrollbar {
+//     width: 9px;
+//     height: 9px;
+//     background-color: #F5F5F5;
+//     opacity: .8;
+// }
+// /*定义滚动条轨道 内阴影+圆角*/
+// ::-webkit-scrollbar-track {
+//     border-radius: 0px;
+//     background-color: #F5F5F5;
+// }
+// /*定义滑块 内阴影+圆角*/
+// ::-webkit-scrollbar-thumb {
+//     border-radius: 0px;
+//     background-color: #909399;
+//     opacity: .8;
+// }
 .pointer {
     cursor: pointer;
 }

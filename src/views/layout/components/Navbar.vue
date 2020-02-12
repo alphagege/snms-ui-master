@@ -17,7 +17,7 @@
       </template>
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
-          <div class="user-name right-menu-item">admin</div>
+          <div class="user-name right-menu-item">{{userInfo.username}}({{userInfo.userId}})</div>
           <img :src="avatar" class="user-avatar" />
           <i class="el-icon-caret-bottom" />
         </div>
@@ -34,8 +34,10 @@
 </template>
 
 <script>
-import { logout } from '@/api/login.js'
-import { mapGetters } from 'vuex'
+import {
+  loginApi
+} from '@/api'
+import { mapGetters, mapMutations } from 'vuex'
 import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import Screenfull from '@/components/Screenfull'
@@ -49,7 +51,11 @@ export default {
     Theme
   },
   computed: {
-    ...mapGetters(['sidebar', 'device'])
+    ...mapGetters({
+      sidebar: 'coframe/app/sidebar',
+      device: 'coframe/app/device',
+      userInfo: 'coframe/user/userInfo'
+    })
   },
   data () {
     return {
@@ -57,11 +63,15 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setUserInfo: 'coframe/user/setUserInfo'
+    }),
     toggleSideBar () {
-      this.$store.dispatch('app/toggleSideBar')
+      this.$store.dispatch('coframe/app/toggleSideBar')
     },
     async logout () {
-      logout({}).then(response => {
+      loginApi.createLogout({}).then(response => {
+        this.setUserInfo({})
         this.$router.push('/login')
       })
     }
@@ -114,6 +124,7 @@ export default {
     }
     .user-name {
       display: inline-block;
+      width: 100px;
       height: 100%;
       font-weight: 600;
       font-size: 15px !important;
