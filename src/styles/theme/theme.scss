@@ -1,0 +1,133 @@
+            // 每个主题特有的设置
+            .theme-#{$theme-name} {
+                .el-card {
+                    .el-card__header {
+                        border-bottom: $theme-container-border-outer;
+                    }
+                }
+                // 背景图片和遮罩
+                .app-wrapper {
+                    background-color: $theme-bg-color;
+                    .coframe-layout-header-aside-mask {
+                        background: $theme-bg-mask;
+                    }
+                }
+                // [菜单] 正常状态
+                .el-menu {
+                    .el-menu-item {
+                        color: $theme-aside-item-color;
+                        background: $theme-aside-item-background-color;
+                        i.fa {
+                            color: $theme-aside-item-color;
+                        }
+                        &:hover {
+                            color: $theme-aside-item-color-hover;
+                            fill: $theme-aside-item-color-hover;
+                            background: $theme-aside-item-background-color-hover;
+                            i.fa {
+                                color: $theme-aside-item-color-hover;
+                            }
+                        }
+                        &:focus {
+                            color: $theme-aside-item-color-focus;
+                            fill: $theme-aside-item-color-focus;
+                            background: $theme-aside-item-background-color-focus;
+                            i.fa {
+                                color: $theme-aside-item-color-focus;
+                            }
+                        }
+                        &.is-active {
+                            color: $theme-aside-item-color-active;
+                            fill: $theme-aside-item-color-active;
+                            background: $theme-aside-item-background-color-active;
+                            i.fa {
+                                color: $theme-aside-item-color-active;
+                            }
+                        }
+                    }
+                }
+                .el-submenu {
+                    .el-submenu__title {
+                        color: $theme-aside-item-color;
+                        background: $theme-aside-item-background-color;
+                        i.fa {
+                            color: $theme-aside-item-color;
+                        }
+                        .el-submenu__icon-arrow {
+                            color: $theme-aside-item-color;
+                        }
+                        &:hover {
+                            color: $theme-aside-item-color-hover;
+                            background: $theme-aside-item-background-color-hover;
+                            i.fa {
+                                color: $theme-aside-item-color-hover;
+                            }
+                            .el-submenu__icon-arrow {
+                                color: $theme-aside-item-color-hover;
+                            }
+                        }
+                    }
+                }
+                //头部标题
+                .sidebar-logo-container {
+                    .sidebar-title {
+                        color: $theme-aside-item-color;
+                    }
+                }
+                .navbar i {
+                    display: inline-block;
+                    width: 16px;
+                    text-align: center;
+                    margin-right: 5px;
+                    color: $theme-aside-item-color;
+                }
+                .navbar i.fa {
+                    font-size: 20px;
+                }
+                .navbar .avatar-container .user-name {
+                    color: $theme-aside-item-color;
+                }
+                // 设置菜单折叠的图标位置
+                .el-menu--collapse .menu-wrapper {
+                    text-align: center;
+                }
+                // 设置面包屑屑字体颜色
+                .app-breadcrumb.el-breadcrumb {
+                    .no-redirect {
+                        color: $theme-aside-item-color;
+                    }
+                    .el-breadcrumb__inner {
+                        color: $theme-aside-item-color;
+                    }
+                }
+                // 设置快速导航(tagsview)部分样式
+                .tags-view-container {
+                    border-bottom: 1px solid #d8dce5;
+                    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+                    .tags-view-wrapper {
+                        .tags-view-item {
+                            border: 1px solid #d8dce5;
+                            color: #495060;
+                            background: $theme-tags-text-color;
+                            &.active {
+                                background-color: $theme-tags-background-color;
+                                color: #fff;
+                                border-color: $theme-tags-background-color;
+                                &::before {
+                                    background: $theme-tags-text-color;
+                                }
+                            }
+                        }
+                    }
+                    .contextmenu {
+                        background: $theme-tags-text-color;
+                        color: #333;
+                        box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
+                        li {
+                            &:hover {
+                                background: #eee;
+                            }
+                        }
+                    }
+                }
+            }

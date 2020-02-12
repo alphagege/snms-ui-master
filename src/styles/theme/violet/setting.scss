@@ -1,0 +1,33 @@
+// 主题名称
+$theme-name: 'violet';
+// 主题背景颜色
+$theme-bg-color: #000;
+// 主题背景图片遮罩
+$theme-bg-mask: rgba(#000, 0);
+// container组件
+$theme-container-background-color: #FFF;
+$theme-container-header-footer-background-color: #FFF;
+$theme-container-border-inner: 1px solid $color-border-2;
+$theme-container-border-outer: 1px solid #8C40E2;
+// 侧边栏上的文字颜色
+$theme-aside-item-color: #FFF;
+$theme-aside-item-background-color: transparent;
+// 侧边栏上的项目在 hover 时
+$theme-aside-item-color-hover: #FFF;
+$theme-aside-item-background-color-hover: linear-gradient(90deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.00) 100%);
+// 侧边栏上的项目在 focus 时
+$theme-aside-item-color-focus: #FFF;
+$theme-aside-item-background-color-focus: linear-gradient(90deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.00) 100%);
+// 侧边栏上的项目在 active 时
+$theme-aside-item-color-active: #FFF;
+$theme-aside-item-background-color-active: linear-gradient(90deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.00) 100%);
+// 侧边栏菜单为空的时候显示的元素
+$theme-aside-menu-empty-icon-color: #FFF;
+$theme-aside-menu-empty-text-color: #FFF;
+$theme-aside-menu-empty-background-color: rgba(#000, .1);
+$theme-aside-menu-empty-icon-color-hover: #FFF;
+$theme-aside-menu-empty-text-color-hover: #FFF;
+$theme-aside-menu-empty-background-color-hover: rgba(#000, .15);
+// 快捷导航背景颜色
+$theme-tags-background-color:#b43ae7;
+$theme-tags-text-color:#fff;

@@ -1,0 +1,18 @@
+$size: 12,
+14,
+16,
+18,
+20,
+22,
+24,
+26,
+28;
+@each $i in $size {
+    .f-#{$i} {
+        font-size: #{$i}px;
+    }
+}
+
+.f-bold {
+    font-weight: bold;
+}

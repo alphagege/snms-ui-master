@@ -1,0 +1,434 @@
+body {
+    height: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Arial, sans-serif;
+    font-size: 12px;
+    overflow-x: hidden;
+}
+
+label {
+    font-weight: 700;
+}
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#app {
+    height: 100%;
+    overflow: hidden;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+.no-padding {
+    padding: 0px !important;
+}
+
+.padding-content {
+    padding: 4px 0;
+}
+
+a:focus,
+a:active {
+    outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+
+div:focus {
+    outline: none;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+.pr-5 {
+    padding-right: 5px;
+}
+
+.pl-5 {
+    padding-left: 5px;
+}
+
+.block {
+    display: block;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.inlineBlock {
+    display: block;
+}
+
+.clearfix {
+    &:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+}
+
+code {
+    background: #eef1f6;
+    padding: 15px 16px;
+    margin-bottom: 20px;
+    display: block;
+    line-height: 36px;
+    font-size: 15px;
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    a {
+        color: #337ab7;
+        cursor: pointer;
+        &:hover {
+            color: rgb(32, 160, 255);
+        }
+    }
+}
+
+.warn-content {
+    background: rgba(66, 185, 131, .1);
+    border-radius: 2px;
+    padding: 16px;
+    padding: 1rem;
+    line-height: 1.6rem;
+    word-spacing: .05rem;
+    a {
+        color: #42b983;
+        font-weight: 600;
+    }
+}
+
+//main-container全局样式
+.app-container {
+    padding: 20px;
+    height: inherit;
+}
+
+.components-container {
+    margin: 30px 50px;
+    position: relative;
+}
+
+.pagination-container {
+    margin-top: 30px;
+}
+
+.text-center {
+    text-align: center
+}
+
+.text-left {
+    text-align: left
+}
+
+.text-right {
+    text-align: right
+}
+
+td.v-top {
+    vertical-align: top;
+}
+
+td.v-middle {
+    vertical-align: middle;
+}
+
+td.v-bottom {
+    vertical-align: bottom;
+}
+
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sub-navbar {
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    width: 100%;
+    text-align: right;
+    padding-right: 20px;
+    transition: 600ms ease position;
+    background: linear-gradient(90deg, rgba(32, 182, 249, 1) 0%, rgba(32, 182, 249, 1) 0%, rgba(33, 120, 241, 1) 100%, rgba(33, 120, 241, 1) 100%);
+    .subtitle {
+        font-size: 20px;
+        color: #fff;
+    }
+    &.draft {
+        background: #d0d0d0;
+    }
+    &.deleted {
+        background: #d0d0d0;
+    }
+}
+
+.link-type,
+.link-type:focus {
+    color: #337ab7;
+    cursor: pointer;
+    &:hover {
+        color: rgb(32, 160, 255);
+    }
+}
+
+.filter-container {
+    padding-bottom: 10px;
+    .filter-item {
+        display: inline-block;
+        vertical-align: middle;
+        margin-bottom: 10px;
+    }
+}
+
+//refine vue-multiselect pluginΩ
+.multiselect {
+    line-height: 16px;
+}
+
+.multiselect--active {
+    z-index: 1000 !important;
+}
+
+.button-tools {
+    text-align: right;
+    border-bottom: 1px solid #DCDFE6;
+    padding-bottom: 5px;
+}
+
+.border-bottom-1 {
+    border-bottom: 1px solid #DCDFE6;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.clear-both {
+    clear: both;
+}
+
+.color-success {
+    color: #42b983;
+}
+
+.body-no-padding {
+    &>.el-dialog__body {
+        padding: 0px;
+    }
+    &>.el-card__body {
+        padding: 0px;
+    }
+}
+
+.el-textarea.is-disabled .el-textarea__inner {
+    background-color: transparent;
+    border: none;
+    color: #000000;
+    cursor: default;
+    padding-left: 0px;
+}
+
+.el-input.is-disabled .el-input__inner {
+    background-color: transparent;
+    border: none;
+    color: #000000;
+    cursor: default;
+    padding: 0px;
+}
+
+.el-input.is-disabled .el-input__suffix {
+    display: none;
+}
+
+.view-form {
+    .el-form-item {
+        margin-bottom: 2px;
+    }
+}
+
+.body-no-margin {
+    .el-card__body {
+        padding: 0px;
+    }
+}
+
+.added-shadow {
+    box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6), 0 2px 4px 0 rgba(232, 237, 250, 0.5);
+}
+
+.hover-shadow {
+    transition: box-shadow .2s ease;
+    &:hover {
+        @extend .added-shadow;
+    }
+}
+
+a.blue {
+    color: #0a76a4;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+a.white {
+    color: #ffffff;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.w-100p {
+    width: 100%;
+}
+
+.log-container {
+    height: inherit;
+    overflow: hidden;
+    position: relative;
+    padding: 0px;
+    pre {
+        background: #000000;
+        color: #ffffff;
+        height: 100%;
+        margin: 0px;
+        padding: 20px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        line-height: 1.42857143;
+    }
+}
+
+.tree-dark {
+    .el-tree-node.is-current>.el-tree-node__content {
+        background: #000000;
+        color: #ffffff;
+    }
+}
+
+.height-inherit {
+    height: inherit;
+}
+
+.secondary-nav-right-title {
+    background: #EAEDF1;
+    height: 70px;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+    background-color: #F5F5F5;
+    opacity: .8;
+}
+
+
+/*定义滚动条轨道 内阴影+圆角*/
+
+::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #F5F5F5;
+}
+
+
+/*定义滑块 内阴影+圆角*/
+
+::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background-color: #909399;
+    opacity: .8;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.title-big {
+    .el-input .el-input__inner {
+        font-size: 22px;
+    }
+}
+
+.auto-hide-border {
+    .el-input .el-input__inner {
+        border: 1px solid transparent;
+        color: #000000;
+        padding: 0px;
+        &:hover {
+            border: 1px solid #bcc0c6;
+        }
+    }
+}
+
+.tree-list {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    .el-tree-node__content {
+        height: 32px;
+        line-height: 32px;
+    }
+}
+
+.tree-list .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+    transition: all 0.15s ease;
+    background: #bcd4ed;
+    border-left: 2px #409eff solid;
+}
+
+.top-block {
+    @extend .hover-shadow;
+    @extend .border-bottom-1;
+    background: #F2F6FC;
+    padding: 5px;
+}
+
+.error-text {
+    color: #f56c6c;
+    font-size: 12px;
+}
+
+.error-input {
+    input {
+        border-color: #f56c6c;
+    }
+}
+
+.success {
+    color: #42b983;
+}
+
+.error {
+    color: #f56c6c;
+}
