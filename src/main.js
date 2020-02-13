@@ -12,9 +12,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import splitPane from 'vue-splitpane'
 import App from './App.vue'
-import router from './router'
 
 import store from './store'
+import {
+    router
+} from './router'
+// console.log(router)
+
 
 import './icons'
 // 组件
@@ -25,8 +29,9 @@ Vue.component('split-pane', splitPane)
 Vue.config.productionTip = false
     // 当前的 baseUrl
 Vue.prototype.$baseUrl = process.env.BASE_URL
-new Vue({
-    router,
+var app = new Vue({
+
     store,
+    router,
     render: h => h(App)
 }).$mount('#app')

@@ -21,7 +21,7 @@
       </app-link>
     </template>
 
-    <el-submenu :index="resolvePath(item.path)" popper-append-to-body ref="subMenu" v-else>
+    <el-submenu :index="resolvePath(item.menuId)" popper-append-to-body ref="subMenu" v-else>
       <template slot="title">
         <item :icon="item.meta && item.meta.icon" :title="item.meta.title" v-if="item.meta" />
       </template>
@@ -29,7 +29,7 @@
         :base-path="resolvePath(child.path)"
         :is-nest="true"
         :item="child"
-        :key="child.path"
+        :key="child.menuId"
         class="nest-menu"
         v-for="child in item.children"
       />
@@ -63,14 +63,14 @@ export default {
       default: ''
     }
   },
-  data () {
+  data() {
     // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
     // TODO: refactor with render function
     this.onlyOneChild = null
     return {}
   },
   methods: {
-    hasOneShowingChild (children = [], parent) {
+    hasOneShowingChild(children = [], parent) {
       const showingChildren = children.filter(item => {
         if (item.hidden) {
           return false
@@ -94,7 +94,7 @@ export default {
 
       return false
     },
-    resolvePath (routePath) {
+    resolvePath(routePath) {
       if (isExternal(routePath)) {
         return routePath
       }

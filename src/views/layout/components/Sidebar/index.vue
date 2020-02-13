@@ -12,8 +12,8 @@
         <sidebar-item
           :base-path="route.path"
           :item="route"
-          :key="route.path"
-          v-for="route in router"
+          :key="route.menuId"
+          v-for="route in menuInfo"
         />
       </el-menu>
     </el-scrollbar>
@@ -33,13 +33,17 @@ export default {
       router: this.$router.options.routes
     }
   },
-  created () { },
+  created() {
+    console.log(this.$router.options.routes)
+    console.log(this.$router)
+  },
   computed: {
     ...mapGetters({
-      sidebar: 'coframe/app/sidebar'
+      sidebar: 'coframe/app/sidebar',
+      menuInfo: 'coframe/menu/menuInfo'
     }),
     // 高亮的路径
-    activeMenu () {
+    activeMenu() {
       const route = this.$route
       const { meta, path } = route
       // if set path, the sidebar will highlight the path you set
@@ -50,18 +54,18 @@ export default {
     },
 
     // 是否显示logo
-    showLogo () {
+    showLogo() {
       console.log(this.$store)
       return this.$store.state.coframe.settings.sidebarLogo
     },
 
     // 主题颜色
-    variables () {
+    variables() {
       return variables
     },
 
     // 侧边栏伸缩展示的标识
-    isCollapse () {
+    isCollapse() {
       return !this.sidebar.opened
     }
   }

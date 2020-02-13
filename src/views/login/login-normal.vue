@@ -89,7 +89,7 @@ import dayjs from 'dayjs'
 import qs from 'qs'
 import { mapActions } from 'vuex'
 export default {
-  data() {
+  data () {
     return {
       // 时间定时器
       timeInterval: null,
@@ -112,12 +112,12 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.timeInterval = setInterval(() => {
       this.refreshTime()
     }, 1000)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     clearInterval(this.timeInterval)
   },
   methods: {
@@ -127,14 +127,14 @@ export default {
     /**
      *  @description 刷新当前时间方法
     */
-    refreshTime() {
+    refreshTime () {
       this.time = dayjs().format('HH:mm:ss')
     },
 
     /**
      *  @description 提交登陆表单
     */
-    handleLogin() {
+    handleLogin () {
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
           this.loading = true

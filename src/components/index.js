@@ -3,4 +3,4 @@ import CoContainer from './ScrollContainer'
 
 Vue.component('co-container', CoContainer)
 Vue.component('coframe-icon', () =>
-    import ('./FontIcon'))
+    import('./FontIcon'))

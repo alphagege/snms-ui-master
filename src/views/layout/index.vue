@@ -28,7 +28,7 @@ import AppMain from './components/AppMain'
 console.log(ResizeMixin)
 export default {
   name: 'Layout',
-  data () {
+  data() {
     return {}
   },
 
@@ -45,7 +45,7 @@ export default {
       device: 'coframe/app/device',
       themeActiveSetting: 'coframe/theme/activeSetting'
     }),
-    classObj () {
+    classObj() {
       return {
         hideSidebar: !this.sidebar.opened, // 隐藏侧边栏所用的样式
         openSidebar: this.sidebar.opened, // 打开侧边栏所用的样式
@@ -57,7 +57,7 @@ export default {
     /**
      * @description 最外层容器的背景图片样式
      */
-    styleLayoutMainGroup () {
+    styleLayoutMainGroup() {
       // console.log(this.themeActiveSetting)
       return {
         ...this.themeActiveSetting.backgroundImage ? {
@@ -66,15 +66,17 @@ export default {
       }
     }
   },
-  beforeCreate () {
+  mounted() {
     // 用户登录后从数据库加载一系列的设置
     this.$store.dispatch('coframe/theme/load')
-    // 用户登录后从数据库加载一系列的设置
+    // 用户登录后从数据库加载用户个人信息
     this.$store.dispatch('coframe/user/load')
+    // 用户登录后从数据库加载用户菜单信息
+    this.$store.dispatch('coframe/menu/load', this)
   },
 
   methods: {
-    handleClickOutside () {
+    handleClickOutside() {
       this.$store.dispatch('coframe/app/closeSideBar', { withoutAnimation: false })
     }
   }

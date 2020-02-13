@@ -1,6 +1,7 @@
 import {
     userApi
 } from '@/api'
+
 const state = {
     // 用户信息
     userInfo: {}

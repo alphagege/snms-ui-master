@@ -30,10 +30,8 @@ export const constantRouterMap = [{
         component: () =>
             import ('@/views/error-page/401.vue'),
         hidden: true
-    }
-]
-
-export const asyncRouterMap = [{
+    },
+    {
         path: '',
         component: Layout,
         redirect: 'dashboard',
@@ -47,25 +45,33 @@ export const asyncRouterMap = [{
                 icon: 'dashboard'
             }
         }]
-    },
-    {
-        path: '*',
-        redirect: '/404',
-        hidden: true
-    },
-    ...Admin
+    }
 ]
 
-const router = new Router({
+export const asyncRouterMap = [
+    // ...Admin
+]
+
+
+export function resetRouter($router, newRouters) {
+    const newRouter = new Router({
+        routes: constantRouterMap
+    });
+    $router.matcher = newRouter.matcher;
+    $router.options.routes = newRouters[0]
+    $router.addRoutes(newRouters[0]);
+    console.log($router)
+}
+
+export const router = new Router({
     // mode: 'history',
     scrollBehavior: () => ({
         y: 0
     }),
     routes: constantRouterMap.concat(asyncRouterMap)
 })
-
 router.beforeEach((to, from, next) => {
-    if (to.path !== '/login') {
+    if (to.path !== '/login' && to.path !== '/dashboard') {
         userApi.getUserInfo().then(() => {})
     }
 
@@ -78,5 +84,3 @@ router.afterEach(() => {
     // 进度条
     NProgress.done()
 })
-
-export default router

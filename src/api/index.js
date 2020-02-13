@@ -1,11 +1,11 @@
 import {
-    generate
+  generate
 } from '../libs/apiGenerator'
 import login from './login'
 import user from './user'
 const api = {
-    login,
-    user
+  login,
+  user
 }
 const apiObject = generate(api)
 export const loginApi = apiObject.login
