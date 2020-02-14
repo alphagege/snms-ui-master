@@ -55,7 +55,7 @@ export default {
 
     // 是否显示logo
     showLogo() {
-      console.log(this.$store)
+      // console.log(this.$store)
       return this.$store.state.coframe.settings.sidebarLogo
     },
 

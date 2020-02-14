@@ -25,7 +25,7 @@ import Sidebar from './components/Sidebar'
 import Navbar from './components/Navbar'
 import TagsView from './components/TagsView'
 import AppMain from './components/AppMain'
-console.log(ResizeMixin)
+// console.log(ResizeMixin)
 export default {
   name: 'Layout',
   data() {
@@ -71,8 +71,6 @@ export default {
     this.$store.dispatch('coframe/theme/load')
     // 用户登录后从数据库加载用户个人信息
     this.$store.dispatch('coframe/user/load')
-    // 用户登录后从数据库加载用户菜单信息
-    this.$store.dispatch('coframe/menu/load', this)
   },
 
   methods: {

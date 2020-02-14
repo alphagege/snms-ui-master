@@ -40,7 +40,7 @@ import path from 'path'
 
 export default {
   components: { ScrollPane },
-  data () {
+  data() {
     return {
       visible: false,
       top: 0,
@@ -50,20 +50,20 @@ export default {
     }
   },
   computed: {
-    visitedViews () {
+    visitedViews() {
       return this.$store.state.coframe.tagsView.visitedViews
     },
-    routes () {
+    routes() {
       return this.$router.options.routes
     }
   },
   watch: {
-    $route () {
+    $route() {
       // 监听路由变化，执行addTags方法
       this.addTags()
       this.moveToCurrentTag()
     },
-    visible (value) {
+    visible(value) {
       if (value) {
         document.body.addEventListener('click', this.closeMenu)
       } else {
@@ -71,17 +71,17 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.initTags()
     this.addTags()
-    console.log(this)
+    // console.log(this)
     // alert();
   },
   methods: {
-    isActive (route) {
+    isActive(route) {
       return route.path === this.$route.path
     },
-    filterAffixTags (routes, basePath = '/') {
+    filterAffixTags(routes, basePath = '/') {
       let tags = []
       routes.forEach(route => {
         if (route.meta && route.meta.affix) {
@@ -102,7 +102,7 @@ export default {
       })
       return tags
     },
-    initTags () {
+    initTags() {
       const affixTags = (this.affixTags = this.filterAffixTags(this.routes))
       for (const tag of affixTags) {
         // Must have tag name
@@ -111,7 +111,7 @@ export default {
         }
       }
     },
-    addTags () {
+    addTags() {
       const { name } = this.$route // 当前点击的路由名称
       // 如果名称存在，执行vuex中的 addView方法，将当前路由对象穿进去
       if (name) {
@@ -119,7 +119,7 @@ export default {
       }
       return false
     },
-    moveToCurrentTag () {
+    moveToCurrentTag() {
       const tags = this.$refs.tag
       this.$nextTick(() => {
         for (const tag of tags) {
@@ -145,7 +145,7 @@ export default {
     //   });
     // },
     // 点击关闭tagviews
-    closeSelectedTag (view) {
+    closeSelectedTag(view) {
       this.$store
         .dispatch('coframe/tagsView/delView', view)
         .then(({ visitedViews }) => {
@@ -154,7 +154,7 @@ export default {
           }
         })
     },
-    closeOthersTags () {
+    closeOthersTags() {
       this.$router.push(this.selectedTag)
       this.$store
         .dispatch('coframe/tagsView/delOthersViews', this.selectedTag)
@@ -162,7 +162,7 @@ export default {
           this.moveToCurrentTag()
         })
     },
-    closeAllTags (view) {
+    closeAllTags(view) {
       this.$store.dispatch('coframe/tagsView/delAllViews').then(({ visitedViews }) => {
         if (this.affixTags.some(tag => tag.path === view.path)) {
           return
@@ -170,7 +170,7 @@ export default {
         this.toLastView(visitedViews, view)
       })
     },
-    toLastView (visitedViews, view) {
+    toLastView(visitedViews, view) {
       const latestView = visitedViews.slice(-1)[0]
       if (latestView) {
         this.$router.push(latestView)
@@ -185,7 +185,7 @@ export default {
         }
       }
     },
-    openMenu (tag, e) {
+    openMenu(tag, e) {
       const menuMinWidth = 105
       const offsetLeft = this.$el.getBoundingClientRect().left // container margin left
       const offsetWidth = this.$el.offsetWidth // container width
@@ -202,7 +202,7 @@ export default {
       this.visible = true
       this.selectedTag = tag
     },
-    closeMenu () {
+    closeMenu() {
       this.visible = false
     }
   }

@@ -37,19 +37,23 @@ function constructRoute(menu) {
     try {
         console.log(menuLevel)
         if (menuLevel === 1) {
+            // 第一级菜单component置为layout
             dynamicComponent = () =>
                 import ('@/views/layout')
             menu.component = dynamicComponent
 
         }
-        console.log(openMode)
         if (openMode === 'in_self' || openMode === 'in_blank') {
-            // alert()
-            console.log(`@/views/${menuPath.slice(1)}`)
-                // dynamicComponent = require(`@/views/${menuPath.slice(1)}`).default;
-            console.log(dynamicComponent)
-            dynamicComponent = () =>
-                import (`@/views/${menuPath.slice(1)}`)
+            if (process.env.NODE_ENV == "development") {
+                dynamicComponent = require(`@/views/${menuPath.slice(1)}/index.vue`).default;
+
+                console.log(dynamicComponent)
+            } else {
+                dynamicComponent = () =>
+                    import (`@/views/${menuPath.slice(1)}/index.vue`)
+            }
+
+
         } else if (openMode === 'out_self') {
             dynamicComponent = {
                 template: `<iframe style="padding: 0px" src="http://${menuPath}"></iframe>`
@@ -107,7 +111,7 @@ export default {
                         asyncRouterMap.push(...menuList)
                         console.log(asyncRouterMap)
                         commit('setMenuInfo', menuList)
-                        resetRouter(vm.$router, [asyncRouterMap, ...blankRouter]);
+                        resetRouter(vm.$router, asyncRouterMap.concat(blankRouter));
                     }).catch(err => {
                         // console.log(err)
                     })

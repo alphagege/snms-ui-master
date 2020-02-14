@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '../views/layout'
-import Admin from './modules/coframe'
+// import Admin from './modules/coframe'
 
 // 进度条
 import NProgress from 'nprogress'
@@ -54,12 +54,13 @@ export const asyncRouterMap = [
 
 
 export function resetRouter($router, newRouters) {
-    const newRouter = new Router({
-        routes: constantRouterMap
-    });
-    $router.matcher = newRouter.matcher;
-    $router.options.routes = newRouters[0]
-    $router.addRoutes(newRouters[0]);
+    console.log($router)
+    console.log(newRouters)
+        // const newRouter = new Router({
+        //     routes: asyncRouterMap
+        // });
+        // $router.matcher = newRouter.matcher;
+    $router.addRoutes(newRouters);
     console.log($router)
 }
 

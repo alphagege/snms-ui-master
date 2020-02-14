@@ -89,7 +89,7 @@ import dayjs from 'dayjs'
 import qs from 'qs'
 import { mapActions } from 'vuex'
 export default {
-  data () {
+  data() {
     return {
       // 时间定时器
       timeInterval: null,
@@ -112,12 +112,12 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.timeInterval = setInterval(() => {
       this.refreshTime()
     }, 1000)
   },
-  beforeDestroy () {
+  beforeDestroy() {
     clearInterval(this.timeInterval)
   },
   methods: {
@@ -127,19 +127,21 @@ export default {
     /**
      *  @description 刷新当前时间方法
     */
-    refreshTime () {
+    refreshTime() {
       this.time = dayjs().format('HH:mm:ss')
     },
 
     /**
      *  @description 提交登陆表单
     */
-    handleLogin () {
+    handleLogin() {
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
           this.loading = true
           this.login(qs.stringify(this.formLogin)).then(response => {
             if (response.status === 200) {
+              // 登陆成功之后加载菜单信息
+              this.$store.dispatch("coframe/menu/load", this);
               this.$message({
                 message: '登录成功!',
                 type: 'success'

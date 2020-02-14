@@ -65,7 +65,7 @@ export default {
   name: '',
   components: {},
   props: {},
-  data () {
+  data() {
     return {
 
     }
@@ -74,12 +74,12 @@ export default {
   computed: {},
   mixins: [],
   methods: {
-    resize () {
-      console.log('resize')
+    resize() {
+      // console.log('resize')
     }
   },
-  created () { },
-  mounted () { }
+  created() { },
+  mounted() { }
 }
 </script>
 <style lang="scss" scoped>
