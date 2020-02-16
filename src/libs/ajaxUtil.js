@@ -6,6 +6,7 @@ import {
 import {
     Message
 } from 'element-ui'
+import store from '@/store'
 // 显示错误
 function errorLog(error) {
     // 显示提示
@@ -52,6 +53,7 @@ service.interceptors.response.use(
                     break
                 case 401:
                     error.message = '未授权，请登录'
+                    store.commit('coframe/user/setToken', "") // 之后会做修改
                     router.push({
                         path: '/login'
                     })
