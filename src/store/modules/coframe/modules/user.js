@@ -1,21 +1,29 @@
 import {
     userApi
 } from '@/api'
-
+import util from '@/libs/util.js'
 const state = {
     // 用户信息
-    userInfo: {}
+    userInfo: {},
+    // token信息
+    token: util.cookies.get('token') || ''
 }
 
 const mutations = {
     setUserInfo: (state, userInfo) => {
         state.userInfo = userInfo
+    },
+    setToken: (state, token) => {
+        state.token = token
     }
 }
 
 const getters = {
     userInfo(state) {
         return state.userInfo
+    },
+    token(state) {
+        return state.token
     }
 
 }
@@ -30,7 +38,8 @@ const actions = {
     }) {
         return new Promise(async resolve => {
             userApi.getUserInfo().then(res => {
-                commit('setUserInfo', res.data)
+                commit('setUserInfo', res.data) //vuex中存储用户信息(将来也可以存入token)
+                util.cookies.set('uuid', res.data.username) // 将用户名存入cookie中(将来也可以存入token)
                 resolve(res)
             }).catch(err => {
                 console.log(err)

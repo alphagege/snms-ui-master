@@ -42,7 +42,7 @@ import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import Screenfull from '@/components/Screenfull'
 import Theme from '@/components/Theme'
-
+import util from '@/libs/util.js'
 export default {
   components: {
     Hamburger,
@@ -57,21 +57,30 @@ export default {
       userInfo: 'coframe/user/userInfo'
     })
   },
-  data () {
+  data() {
     return {
       avatar: require('@/assets/user.gif')
     }
   },
   methods: {
     ...mapMutations({
-      setUserInfo: 'coframe/user/setUserInfo'
+      setUserInfo: 'coframe/user/setUserInfo',
+      setMenuInfo: 'coframe/menu/setMenuInfo',
+      setToken: 'coframe/user/setToken'
     }),
-    toggleSideBar () {
+    toggleSideBar() {
       this.$store.dispatch('coframe/app/toggleSideBar')
     },
-    async logout () {
+    async logout() {
       loginApi.createLogout({}).then(response => {
-        this.setUserInfo({})
+        // 删除cookie
+        util.cookies.remove('token')
+        util.cookies.remove('uuid')
+
+        this.setUserInfo({}) // 登出清空vuex用户个人信息数据
+        this.setMenuInfo([]) // 登出清空vuex用户菜单信息数据
+        this.setToken("") //登出清空vuex token数据
+
         this.$router.push('/login')
       })
     }

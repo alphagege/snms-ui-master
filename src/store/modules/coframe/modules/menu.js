@@ -1,31 +1,45 @@
 import {
-    userApi
+    userApi,
+    systemMenuApi
+
 } from '@/api'
 import {
     asyncRouterMap,
     resetRouter
 } from "@/router"
-// console.log(asyncRouterMap)
 const state = {
-    // 菜单信息
-    menuInfo: []
+    // 用户菜单信息
+    menuInfo: [],
+    // 系统管理->系统资源->菜单管理->菜单树
+    allMenuInfo: []
 }
 
 const mutations = {
     setMenuInfo: (state, menuInfo) => {
+        console.log(menuInfo)
         state.menuInfo = menuInfo
+    },
+    setAllMenuInfo: (state, allMenuInfo) => {
+        state.allMenuInfo = allMenuInfo
     }
 }
 
 const getters = {
     menuInfo(state) {
         return state.menuInfo
+    },
+    allMenuInfo(state) {
+        return state.allMenuInfo
     }
+
 
 }
 
 // const actions = 
 // 控制台报错 Cannot read property 'range' of null 降级babel-eslint
+
+
+
 function constructRoute(menu) {
     // alert()
     let dynamicComponent
@@ -67,6 +81,11 @@ function constructRoute(menu) {
 }
 const blankRouter = [];
 
+/**
+ *
+ * @description 整合从后台返回的菜单数据，并挂载至router
+ * @param {*} menu 后台返回的菜单数据
+ */
 function transformRouter(menus) {
     for (var i in menus) {
         menus[i].meta = {
@@ -91,19 +110,25 @@ export default {
     getters,
     actions: {
         /**
-         * @description 从数据库取用户菜单
-         * @param {Object} context
+         *
+         * @description 加载整合动态菜单
+         * @param {*} {
+         *             commit
+         *         }
+         * @param {*} vm vue实例对象
+         * @param {*} id 标识具体用户
+         * @returnsn Promise对象
          */
         load({
             commit
-        }, vm) {
+        }, vm, id) {
             console.log(vm)
             return new Promise(async resolve => {
-                const resUser = await userApi.getUserInfo()
-                if (resUser.status === 200) {
-                    userApi.getUserMenus({
+                // const resUser = await userApi.getUserInfo()
+                // if (resUser.status === 200) {
+                userApi.getUserMenus({
                         pathParams: {
-                            id: resUser.data.id
+                            id: id
                         }
                     }).then(res => {
                         asyncRouterMap.length = 0; //置空 防止多次登陆累加
@@ -115,7 +140,20 @@ export default {
                     }).catch(err => {
                         // console.log(err)
                     })
-                }
+                    // }
+            })
+        },
+
+        getAllMenuInfo({
+            commit
+        }) {
+            return new Promise(async resolve => {
+                systemMenuApi.getSystemMenu().then(res => {
+                    commit("setAllMenuInfo", res.data)
+                }).catch(err => {
+
+                })
+
             })
         }
     }

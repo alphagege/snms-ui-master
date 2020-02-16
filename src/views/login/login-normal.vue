@@ -87,7 +87,8 @@
 <script>
 import dayjs from 'dayjs'
 import qs from 'qs'
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
+import util from '@/libs/util.js'
 export default {
   data() {
     return {
@@ -124,6 +125,9 @@ export default {
     ...mapActions('coframe/account', [
       'login'
     ]),
+    ...mapMutations('coframe/user', [
+      'setToken'
+    ]),
     /**
      *  @description 刷新当前时间方法
     */
@@ -140,8 +144,9 @@ export default {
           this.loading = true
           this.login(qs.stringify(this.formLogin)).then(response => {
             if (response.status === 200) {
-              // 登陆成功之后加载菜单信息
-              this.$store.dispatch("coframe/menu/load", this);
+              const token = '8dfhassad0asdjwoeiruty'
+              util.cookies.set('token', token) //先存一个假的token，结合业务修改
+              this.setToken(token)
               this.$message({
                 message: '登录成功!',
                 type: 'success'

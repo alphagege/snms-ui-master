@@ -1,8 +1,9 @@
 /*
  * @Author: dongwenjie
  * @Date: 2020-01-19 10:09:52
+ * @Description 主题组件
  * @Last Modified by: dongwenjie
- * @Last Modified time: 2020-01-20 15:14:56
+ * @Last Modified time: 2020-02-17 01:12:35
  */
 <template>
   <div>
@@ -22,28 +23,28 @@ export default {
   components: {
     themeList
   },
-  data () {
+  data() {
     return {
       dialogVisible: false
     }
   },
-  mounted () {
+  mounted() {
     this.init()
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.destroy()
   },
   methods: {
-    click () {
+    click() {
 
     },
-    change () {
+    change() {
 
     },
-    init () {
+    init() {
 
     },
-    destroy () {
+    destroy() {
 
     }
   }

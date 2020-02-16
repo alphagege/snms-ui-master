@@ -1,3 +1,11 @@
+/*
+ * @Author: dongwenjie 
+ * @Date: 2020-02-17 01:08:54
+ * @Description 字体图标组件 
+ * @Last Modified by: dongwenjie
+ * @Last Modified time: 2020-02-17 01:09:20
+ */
+
 <template>
   <i :class="`fa-${name}`" aria-hidden="true" class="fa"></i>
 </template>

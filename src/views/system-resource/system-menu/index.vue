@@ -1,5 +1,6 @@
+
 <template>
-  <co-container>
+  <!-- <co-container>
     <split-pane :default-percent="35" :min-percent="35" @resize="resize" split="vertical">
       <template slot="paneL">
         <div class="left-container">
@@ -57,7 +58,8 @@
         <div class="right-container"></div>
       </template>
     </split-pane>
-  </co-container>
+  </co-container>-->
+  <router-view></router-view>
 </template>
 
 <script>

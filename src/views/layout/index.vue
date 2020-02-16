@@ -66,11 +66,17 @@ export default {
       }
     }
   },
-  mounted() {
-    // 用户登录后从数据库加载一系列的设置
-    this.$store.dispatch('coframe/theme/load')
-    // 用户登录后从数据库加载用户个人信息
-    this.$store.dispatch('coframe/user/load')
+  async beforeCreate() {
+    // // 用户登录后从数据库加载用户个人信息
+    // let { data, status } = await this.$store.dispatch('coframe/user/load')
+    // if (status === 200) {
+    //   // 成功拉取用户信息
+    //   // 用户登录后从本地数据库加载一系列的设置
+    //   await this.$store.dispatch('coframe/theme/load')
+    //   // 从数据库加载用户菜单信息,登陆页默认不成功,刷新页面重新执行
+    //   await this.$store.dispatch('coframe/menu/load', this, data.id)
+    // }
+
   },
 
   methods: {

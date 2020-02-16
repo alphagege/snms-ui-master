@@ -3,9 +3,7 @@ import Router from 'vue-router'
 import Layout from '../views/layout'
 // import Admin from './modules/coframe'
 
-// 进度条
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
+
 
 import {
     userApi
@@ -70,18 +68,4 @@ export const router = new Router({
         y: 0
     }),
     routes: constantRouterMap.concat(asyncRouterMap)
-})
-router.beforeEach((to, from, next) => {
-    if (to.path !== '/login' && to.path !== '/dashboard') {
-        userApi.getUserInfo().then(() => {})
-    }
-
-    // 进度条
-    NProgress.start()
-    next()
-})
-
-router.afterEach(() => {
-    // 进度条
-    NProgress.done()
 })

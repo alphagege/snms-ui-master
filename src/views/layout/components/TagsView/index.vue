@@ -251,6 +251,9 @@ export default {
         }
       }
     }
+    .tags-view-item:first-child {
+      margin-left: 0;
+    }
   }
   .contextmenu {
     margin: 0;

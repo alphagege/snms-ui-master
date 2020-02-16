@@ -1,6 +1,19 @@
+/*
+ * @Author: dongwenjie 
+ * @Date: 2020-02-17 01:11:48 
+ * @Description svg icon组件
+ * @Last Modified by: dongwenjie
+ * @Last Modified time: 2020-02-17 01:12:09
+ */
+
 <template>
-  <div v-if="isExternal" :style="styleExternalIcon" class="svg-external-icon svg-icon" v-on="$listeners" />
-  <svg v-else :class="svgClass" aria-hidden="true" v-on="$listeners">
+  <div
+    :style="styleExternalIcon"
+    class="svg-external-icon svg-icon"
+    v-if="isExternal"
+    v-on="$listeners"
+  />
+  <svg :class="svgClass" aria-hidden="true" v-else v-on="$listeners">
     <use :xlink:href="iconName" />
   </svg>
 </template>
@@ -22,20 +35,20 @@ export default {
     }
   },
   computed: {
-    isExternal () {
+    isExternal() {
       return isExternal(this.iconClass)
     },
-    iconName () {
+    iconName() {
       return `#icon-${this.iconClass}`
     },
-    svgClass () {
+    svgClass() {
       if (this.className) {
         return 'svg-icon ' + this.className
       } else {
         return 'svg-icon'
       }
     },
-    styleExternalIcon () {
+    styleExternalIcon() {
       return {
         mask: `url(${this.iconClass}) no-repeat 50% 50%`,
         '-webkit-mask': `url(${this.iconClass}) no-repeat 50% 50%`
@@ -56,7 +69,7 @@ export default {
 
 .svg-external-icon {
   background-color: currentColor;
-  mask-size: cover!important;
+  mask-size: cover !important;
   display: inline-block;
 }
 </style>

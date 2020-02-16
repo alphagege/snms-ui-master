@@ -1,3 +1,11 @@
+/*
+ * @Author: dongwenjie 
+ * @Date: 2020-02-17 01:10:42 
+ * @Description 全屏组件
+ * @Last Modified by:   dongwenjie 
+ * @Last Modified time: 2020-02-17 01:10:42 
+ */
+
 <template>
   <div>
     <el-tooltip :content="isFullscreen?'退出全屏':'全屏'" effect="dark" placement="bottom">
@@ -11,19 +19,19 @@ import screenfull from 'screenfull'
 
 export default {
   name: 'Screenfull',
-  data () {
+  data() {
     return {
       isFullscreen: false
     }
   },
-  mounted () {
+  mounted() {
     this.init()
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.destroy()
   },
   methods: {
-    click () {
+    click() {
       if (!screenfull.enabled) {
         this.$message({
           message: '您的浏览器不支持全屏操作',
@@ -33,15 +41,15 @@ export default {
       }
       screenfull.toggle()
     },
-    change () {
+    change() {
       this.isFullscreen = screenfull.isFullscreen
     },
-    init () {
+    init() {
       if (screenfull.enabled) {
         screenfull.on('change', this.change)
       }
     },
-    destroy () {
+    destroy() {
       if (screenfull.enabled) {
         screenfull.off('change', this.change)
       }

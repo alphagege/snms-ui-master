@@ -15,7 +15,7 @@ export default {
     // cachedViews() {
     //   return this.$store.state.tagsView.cachedViews;
     // },
-    key () {
+    key() {
       return this.$route.path
     }
   }
@@ -26,11 +26,11 @@ export default {
 .app-main {
   /* 50= navbar  50  */
   min-height: calc(100vh - 84px);
-  width: 100%;
+  width: calc(100% - 20px);
   padding: 30px;
   position: relative;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgb(255, 255, 255);
 }
 
 .fixed-header + .app-main {
