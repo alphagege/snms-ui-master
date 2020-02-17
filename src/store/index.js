@@ -5,9 +5,9 @@ import coframe from './modules/coframe'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  // namespaced: true,
-  modules: {
-    coframe
-  }
+    // namespaced: true,
+    modules: {
+        coframe
+    }
 })
 export default store

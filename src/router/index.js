@@ -54,10 +54,6 @@ export const asyncRouterMap = [
 export function resetRouter($router, newRouters) {
     console.log($router)
     console.log(newRouters)
-        // const newRouter = new Router({
-        //     routes: asyncRouterMap
-        // });
-        // $router.matcher = newRouter.matcher;
     $router.addRoutes(newRouters);
     console.log($router)
 }

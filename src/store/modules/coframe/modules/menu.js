@@ -35,9 +35,7 @@ const getters = {
 
 }
 
-// const actions = 
 // 控制台报错 Cannot read property 'range' of null 降级babel-eslint
-
 
 
 function constructRoute(menu) {
@@ -112,9 +110,7 @@ export default {
         /**
          *
          * @description 加载整合动态菜单
-         * @param {*} {
-         *             commit
-         *         }
+         * @param {*} {commit}
          * @param {*} vm vue实例对象
          * @param {*} id 标识具体用户
          * @returnsn Promise对象
@@ -124,26 +120,29 @@ export default {
         }, vm, id) {
             console.log(vm)
             return new Promise(async resolve => {
-                // const resUser = await userApi.getUserInfo()
-                // if (resUser.status === 200) {
                 userApi.getUserMenus({
-                        pathParams: {
-                            id: id
-                        }
-                    }).then(res => {
-                        asyncRouterMap.length = 0; //置空 防止多次登陆累加
-                        let menuList = transformRouter(res.data);
-                        asyncRouterMap.push(...menuList)
-                        console.log(asyncRouterMap)
-                        commit('setMenuInfo', menuList)
-                        resetRouter(vm.$router, asyncRouterMap.concat(blankRouter));
-                    }).catch(err => {
-                        // console.log(err)
-                    })
-                    // }
+                    pathParams: {
+                        id: id
+                    }
+                }).then(res => {
+                    asyncRouterMap.length = 0; //置空 防止多次登陆累加
+                    let menuList = transformRouter(res.data);
+                    asyncRouterMap.push(...menuList)
+                    console.log(asyncRouterMap)
+                    commit('setMenuInfo', menuList)
+                    resetRouter(vm.$router, asyncRouterMap.concat(blankRouter));
+                }).catch(err => {
+                    // console.log(err)
+                })
             })
         },
 
+        /**
+         *
+         * @description 系统管理->系统资源->菜单管理->获取所有菜单树
+         * @param {*} {commit}
+         * @returns Promise对象
+         */
         getAllMenuInfo({
             commit
         }) {
@@ -153,7 +152,6 @@ export default {
                 }).catch(err => {
 
                 })
-
             })
         }
     }

@@ -4,7 +4,10 @@
       <template slot="paneL">
         <div class="left-container">
           <co-container better-scroll type="card">
-            <div class="slot-header" slot="header">菜单树</div>
+            <div class="slot-header" slot="header">
+              <coframe-icon class="mr-5" name="tree"></coframe-icon>
+              <span>菜单树</span>
+            </div>
             <el-card>
               <el-tree
                 :data="menuTree"
