@@ -1,6 +1,7 @@
 <template>
   <co-container>
     <split-pane :default-percent="35" :min-percent="35" split="vertical">
+      <!-- 左侧面板 -->
       <template slot="paneL">
         <div class="left-container">
           <co-container better-scroll type="card">
@@ -15,6 +16,8 @@
                 :render-content="renderContent"
                 @node-click="showMenuInfo"
                 default-expand-all
+                empty-text="暂无数据"
+                highlight-current
                 node-key="id"
               ></el-tree>
             </el-card>
@@ -22,9 +25,103 @@
         </div>
       </template>
       <template slot="paneR">
-        <div class="right-container"></div>
+        <!-- 右侧面板 -->
+        <div class="right-container">
+          <co-container better-scroll type="card">
+            <div class="slot-header" slot="header">
+              <coframe-icon class="mr-5" name="edit"></coframe-icon>
+              <span>菜单信息</span>
+            </div>
+            <el-card>
+              <div class="clearfix" slot="header">
+                <el-button
+                  class="tip-text"
+                  size="mini"
+                  type="text"
+                  v-if="!menuForm.leaf"
+                >注意：非叶子节点的菜单需要添加组件路径！</el-button>
+
+                <el-button class="fr" size="mini" type="primary">保存</el-button>
+              </div>
+              <el-form
+                :model="menuForm"
+                :rules="menuRules"
+                label-width="100px"
+                ref="menuForm"
+                size="mini"
+              >
+                <el-row :gutter="16">
+                  <el-col :span="12">
+                    <el-form-item label="菜单名称" prop="menuName">
+                      <el-input v-model="menuForm.menuName"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="菜单代码" prop="menuId">
+                      <el-input v-model="menuForm.menuId"></el-input>
+                    </el-form-item>
+                  </el-col>
+
+                  <el-col :span="12" v-if="menuForm.leaf">
+                    <el-form-item label="菜单打开方式" prop="openMode">
+                      <el-select v-model="menuForm.openMode">
+                        <el-option
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                          v-for="item in menuOpenWay"
+                        ></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item :label="menuForm.leaf?'菜单路径':'组件路径'" prop="menuPath">
+                      <el-input v-model="menuForm.menuPath"></el-input>
+                    </el-form-item>
+                  </el-col>
+
+                  <el-col :span="12">
+                    <el-form-item label="显示顺序" prop="menuOrder">
+                      <el-input v-model="menuForm.menuOrder"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="相对路径" prop="relativePath">
+                      <!-- <el-input v-model="menuForm.relativePath"></el-input> -->
+                      <el-switch v-model="menuForm.relativePath"></el-switch>
+                    </el-form-item>
+                  </el-col>
+
+                  <el-col :span="12">
+                    <el-form-item label="是否启用" prop="enable">
+                      <el-switch v-model="menuForm.enable"></el-switch>
+                    </el-form-item>
+                  </el-col>
+                  <!-- <el-col :span="12">
+                    <el-form-item label="上级菜单" prop="parentId">
+                      <el-select v-model="menuForm.parentId">
+                        <el-option
+                          :key="item.id"
+                          :label="item.menuName"
+                          :value="item.menuId"
+                          v-for="item in parentList"
+                        ></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-col>-->
+                </el-row>
+              </el-form>
+            </el-card>
+          </co-container>
+        </div>
       </template>
     </split-pane>
+    <el-dialog :visible.sync="dialogVisible" title="添加菜单" width="40%">
+      <span class="dialog-footer" slot="footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button @click="dialogVisible = false" type="primary">确 定</el-button>
+      </span>
+    </el-dialog>
   </co-container>
 </template>
 
@@ -38,19 +135,43 @@ export default {
   props: {},
   data() {
     return {
-      parentList: []
+      menuForm: {
+        menuName: "", // 菜单名称
+        menuId: "", // 菜单代码
+        openMode: "", // 菜单打开方式
+        menuPath: "", // 菜单路径
+        menuOrder: "", // 显示顺序
+        relativePath: false, // 相对路径
+        enable: false, // 是否启用
+      },
+      menuRules: {},
+      // 菜单打开方式
+      menuOpenWay: [
+        {
+          value: "in_self",
+          label: "内部链接(当前页)"
+        },
+        {
+          value: "in_blank",
+          label: "内部链接(新增tab页)"
+        },
+        {
+          value: "out_self",
+          label: "外部链接(当前页)"
+        },
+        {
+          value: "out_blank",
+          label: "外部链接(新增tab页)"
+        }
+      ],
+      dialogVisible: false
+      // 上级菜单
+      // parentList: []
     }
   },
   watch: {},
   computed: {
     menuTree() {
-      // if (this.allMenus[3].children) {
-      //   this.allMenus[3].children[1].leaf = false;
-      //   console.log(this.allMenus[3].children[1].leaf);
-      // }
-
-      // let node = this.allMenus[3].children[1];
-      // node.leaf = false;
       let tree = [{
         menuName: "应用菜单",
         id: 9999,
@@ -68,11 +189,12 @@ export default {
       'getAllMenuInfo'
     ]),
     append(data) {
-      const newChild = { id: id++, label: 'testtest', children: [] };
-      if (!data.children) {
-        this.$set(data, 'children', []);
-      }
-      data.children.push(newChild);
+      this.dialogVisible = true;
+      // const newChild = { id: id++, label: 'testtest', children: [] };
+      // if (!data.children) {
+      //   this.$set(data, 'children', []);
+      // }
+      // data.children.push(newChild);
     },
 
     remove(node, data) {
@@ -83,9 +205,16 @@ export default {
     },
 
     renderContent(h, { node, data, store }) {
-      console.log(node)
-      console.log(data.id);
-      console.log(data);
+      let btns = <span>
+        {!data.leaf && (
+          <el-button icon="el-icon-plus" size="mini" on-click={() => this.append(data)}></el-button>
+
+        )} {" "}
+        {data.childrenCount === 0 && (
+          <el-button icon="el-icon-minus" size="mini" on-click={() => this.remove(node, data)}></ el-button>
+        )}
+      </span>
+
       if (data.id === 9999) {
         return (
           <span class="custom-tree-node">
@@ -94,22 +223,21 @@ export default {
               </i>
               {data.menuName}
             </span>
-            <span style="width:98px">
-              <el-button size="mini" style="width:100%" type="primary" icon="el-icon-plus" on-click={() => this.append(data)}>添加主菜单</el-button>
+            <span >
+              <el-button type="primary" size="mini" icon="el-icon-plus" on-click={() => this.append(data)}></el-button>
             </span>
           </span >
         );
-      } else {
+      }
+      else {
         return (
           <span class="custom-tree-node">
             <span>
               <i class="el-icon-document mr-5" ></i>
+
               {data.menuName}
             </span>
-            <span>
-              <el-button size="mini" icon="el-icon-plus" on-click={() => this.append(data)}></el-button>
-              <el-button size="mini" icon="el-icon-minus" on-click={() => this.remove(node, data)}></el-button>
-            </span>
+            {btns}
           </span >
         );
       }
@@ -119,10 +247,31 @@ export default {
     getSystemMenu() {
       this.getAllMenuInfo();
     },
-    showMenuInfo(a, b, c) {
-      console.log(a);
-      console.log(b);
-      console.log(c);
+    // 点击tree节点，展示当前节点的菜单信息
+    async showMenuInfo(data, node, event) {
+      if (data.id === 9999) {
+        return
+      }
+      this.menuForm = Object.assign({}, data);
+      // console.log(systemMenuApi)
+      // let res = await systemMenuApi.getSystemMenu({
+      //   queryParams: {
+      //     containLeaf: false
+      //   }
+      // })
+      // if (res.status === 200) {
+      //   this.parentList = [
+      //     {
+      //       menuId: "appRoot",
+      //       menuName: "应用菜单",
+      //       id: 9999
+      //     },
+      //     ...res.data
+      //   ];
+      //   if (!this.menuForm.parentId) {
+      //     this.menuForm.parentId = "appRoot";
+      //   }
+      // }
     }
   },
   created() {
@@ -142,5 +291,8 @@ export default {
 .slot-header {
   font-size: 14px;
   font-weight: 600;
+}
+.right-container .el-col {
+  height: 47px;
 }
 </style>

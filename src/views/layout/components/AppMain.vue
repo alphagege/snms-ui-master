@@ -30,7 +30,7 @@ export default {
   padding: 30px;
   position: relative;
   overflow: hidden;
-  background: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .fixed-header + .app-main {

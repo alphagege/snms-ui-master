@@ -19,6 +19,7 @@ import {
 // 进度条
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+
 import store from './store'
 
 //Vue router 页面 刷新 不会进到router.beforeEach,因为在挂载el之后检查的路由，把路由放前面就好了
