@@ -1,13 +1,15 @@
 <template>
   <div class="wrapper">
-    111111111
+    <ul>
+      <li></li>
+    </ul>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: '222',
+  name: '',
   components: {},
   props: {},
   data() {

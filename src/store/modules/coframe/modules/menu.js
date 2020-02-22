@@ -31,8 +31,6 @@ const getters = {
     allMenuInfo(state) {
         return state.allMenuInfo
     }
-
-
 }
 
 // 控制台报错 Cannot read property 'range' of null 降级babel-eslint
@@ -125,12 +123,14 @@ export default {
                         id: id
                     }
                 }).then(res => {
-                    asyncRouterMap.length = 0; //置空 防止多次登陆累加
-                    let menuList = transformRouter(res.data);
-                    asyncRouterMap.push(...menuList)
-                    console.log(asyncRouterMap)
-                    commit('setMenuInfo', menuList)
-                    resetRouter(vm.$router, asyncRouterMap.concat(blankRouter));
+                    if (res.status === 200) {
+                        asyncRouterMap.length = 0; //置空 防止多次登陆累加
+                        let menuList = transformRouter(res.data);
+                        asyncRouterMap.push(...menuList)
+                        console.log(asyncRouterMap)
+                        commit('setMenuInfo', menuList)
+                        resetRouter(vm.$router, asyncRouterMap.concat(blankRouter));
+                    }
                 }).catch(err => {
                     // console.log(err)
                 })
